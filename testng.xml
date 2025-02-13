@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+<test verbose="2" preserve-order="true" name="/Users/alextimofeev/IdeaProjects/rest-assured-portfolio-main/src/test/java/api/tests/ReqresTest.java">
+    <classes>
+        <class name="api.tests.ReqresTest">
+            <methods>
+                <include name="successRegTest"/>
+                <include name="unSuccessRegTest"/>
+                <include name="sortedYearsTest"/>
+            </methods>
+        </class>
+    </classes>
+</test>
+</suite>
