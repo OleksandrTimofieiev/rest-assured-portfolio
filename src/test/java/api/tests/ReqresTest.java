@@ -2,8 +2,9 @@ package api.tests;
 
 import api.specification.Specifications;
 import api.models.*;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Tag;
 
 import java.time.Clock;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static io.restassured.RestAssured.given;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ReqresTest {
     private final static String URL = "https://reqres.in";
@@ -25,21 +27,22 @@ public class ReqresTest {
                 .then().log().all()
                 .extract().body().jsonPath().getList("data", UserData.class);
 
-        users.forEach((x) -> Assert.assertTrue(x.getAvatar().contains(x.getId().toString())));
+        users.forEach((x) -> assertTrue(x.getAvatar().contains(x.getId().toString())));
 
-        Assert.assertTrue(users.stream().allMatch(x->x.getEmail().endsWith("@reqres.in")));
+        assertTrue(users.stream().allMatch(x->x.getEmail().endsWith("@reqres.in")));
 
         List<String> avatars = users.stream().map(UserData::getAvatar).toList();
         List<String> ids = users.stream().map(x -> x.getId().toString()).toList();
 
         for (int i=0;i<avatars.size();i+=1) {
-            Assert.assertTrue(avatars.get(i).contains(ids.get(i)));
+            assertTrue(avatars.get(i).contains(ids.get(i)));
             System.out.println("getting an avatar");
         }
     }
 
     //A positive registration test
     @Test
+    @Tag("registration")
     public void successRegTest() {
         Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOk200());
         Integer id = 4;
@@ -52,15 +55,16 @@ public class ReqresTest {
                 .post("/api/register")
                 .then().log().all()
                 .extract().as(SuccessReg.class);
-        Assert.assertNotNull(successReg.getId());
-        Assert.assertNotNull(successReg.getToken());
+        Assertions.assertNotNull(successReg.getId());
+        Assertions.assertNotNull(successReg.getToken());
 
-        Assert.assertEquals(id, successReg.getId());
-        Assert.assertEquals(token, successReg.getToken());
+        Assertions.assertEquals(id, successReg.getId());
+        Assertions.assertEquals(token, successReg.getToken());
     }
 
     //A negative registration test
     @Test
+    @Tag("registration")
     public void unSuccessRegTest() {
         Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecFailed400());
 
@@ -72,7 +76,7 @@ public class ReqresTest {
                 .then().log().all()
                 .extract().as(UnSuccessReg.class);
 
-        Assert.assertNotNull("Missing password", unSuccessReg.getError());
+        Assertions.assertNotNull("Missing password", unSuccessReg.getError());
     }
 
     //We are checking if years are sorted in the ascending order
@@ -89,7 +93,7 @@ public class ReqresTest {
         List<Integer> years = colors.stream().map(ColorsData::getYear).sorted().collect(Collectors.toList());
         Stream<Integer> st1 = years.stream().sorted();
         List<Integer> years2 = st1.collect(Collectors.toList());
-        Assert.assertEquals(years, years2);
+        Assertions.assertEquals(years, years2);
     }
 
     //We are deleting a user
@@ -118,6 +122,6 @@ public class ReqresTest {
         String regex = "(.{5})$";
         String regexTwo = "(.{8})$";
         String currentTime = Clock.systemUTC().instant().toString().replaceAll(regexTwo, "");
-        Assert.assertEquals(currentTime, response.getUpdatedAt().replaceAll(regex, ""));
+        Assertions.assertEquals(currentTime, response.getUpdatedAt().replaceAll(regex, ""));
     }
 }
