@@ -56,3 +56,9 @@ rest-assured-portfolio/
 │── README.md          # Project documentation
 ```
 
+## Contact & References
+- **Author:** Oleksandr Timofieiev
+- **GitHub:** [OleksandrTimofieiev](https://github.com/OleksandrTimofieiev)
+- **Rest Assured Docs:** [https://rest-assured.io/](https://rest-assured.io/)
+- **JUnit 5 Docs:** [https://junit.org/junit5/](https://junit.org/junit5/)
+
