@@ -35,9 +35,13 @@ To execute all test cases, run:
 ```sh
 mvn test
 ```
-If using **TestNG**, specify the suite file:
+If using **JUnit Platform Suite**, specify tags:
 ```sh
-mvn test -DsuiteXmlFile=testng.xml
+mvn test -Dgroups="registration"
+```
+Or directly run the suite class:
+```sh
+mvn test -Dtest=RegistrationTests
 ```
 
 ## Project Structure
