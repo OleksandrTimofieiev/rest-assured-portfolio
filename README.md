@@ -56,10 +56,3 @@ rest-assured-portfolio/
 │── README.md          # Project documentation
 ```
 
-## Reports & Logs
-To generate and view **Allure Reports**, use:
-```sh
-mvn clean test allure:report
-mvn allure:serve
-```
-
