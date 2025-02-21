@@ -1,7 +1,7 @@
 package api.tests;
 
-import api.specification.Specifications;
-import api.models.*;
+import api.utils.Specifications;
+import api.config.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Tag;

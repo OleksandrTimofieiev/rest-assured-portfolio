@@ -47,10 +47,11 @@ mvn test -Dtest=RegistrationTests
 ## Project Structure
 ```
 rest-assured-portfolio/
-│── src/test/java/
+│── src/test/java/api
 │   ├── tests/         # API test cases
 │   ├── utils/         # Utility classes (e.g., request builders, response handlers)
 │   ├── config/        # Configuration files
+│   ├── suites/        # Run tests in a suite according to a specific tag
 │── pom.xml            # Project dependencies
 │── README.md          # Project documentation
 ```
